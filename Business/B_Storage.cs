@@ -9,7 +9,7 @@ namespace Business
 {
     public class B_Storage
     {
-        public StorageEntity GetStorage(string id)
+        public static StorageEntity GetStorage(string id)
         {
             using InventoryContext db = new InventoryContext();
             return db.Storages
@@ -17,20 +17,20 @@ namespace Business
                 .FirstOrDefault();
         }
 
-        public List<StorageEntity> StorageList()
+        public static List<StorageEntity> StorageList()
         {
             using InventoryContext db = new InventoryContext();
             return db.Storages.ToList();
         }
 
-        public void CreateStorage(StorageEntity oStorage)
+        public static void CreateStorage(StorageEntity oStorage)
         {
             using InventoryContext db = new InventoryContext();
             db.Storages.Add(oStorage);
             db.SaveChanges();
         }
 
-        public void UpdateStorage(StorageEntity oStorage)
+        public static void UpdateStorage(StorageEntity oStorage)
         {
             using InventoryContext db = new InventoryContext();
             db.Storages.Update(oStorage);

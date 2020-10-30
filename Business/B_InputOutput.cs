@@ -9,7 +9,7 @@ namespace Business
 {
     public class B_InputOutput
     {
-        public InputOutputEntity GetInOut(string id)
+        public static InputOutputEntity GetInOut(string id)
         {
             using InventoryContext db = new InventoryContext();
             return db.InOuts
@@ -17,20 +17,20 @@ namespace Business
                 .FirstOrDefault();
         }
 
-        public List<InputOutputEntity> InOutList()
+        public static List<InputOutputEntity> InOutList()
         {
             using InventoryContext db = new InventoryContext();
             return db.InOuts.ToList();
         }
 
-        public void CreateInOut(InputOutputEntity oInOuts)
+        public static void CreateInOut(InputOutputEntity oInOuts)
         {
             using InventoryContext db = new InventoryContext();
             db.InOuts.Add(oInOuts);
             db.SaveChanges();
         }
 
-        public void UpdateInOut(InputOutputEntity oInOuts)
+        public static void UpdateInOut(InputOutputEntity oInOuts)
         {
             using InventoryContext db = new InventoryContext();
             db.InOuts.Update(oInOuts);

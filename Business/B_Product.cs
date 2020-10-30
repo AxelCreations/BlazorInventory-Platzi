@@ -9,7 +9,7 @@ namespace Business
 {
     public class B_Product
     {
-        public ProductEntity GetProduct(string id)
+        public static ProductEntity GetProduct(string id)
         {
             using InventoryContext db = new InventoryContext();
             return db.Products
@@ -17,20 +17,20 @@ namespace Business
                 .FirstOrDefault();
         }
 
-        public List<ProductEntity> ProductList()
+        public static List<ProductEntity> ProductList()
         {
             using InventoryContext db = new InventoryContext();
             return db.Products.ToList();
         }
 
-        public void CreateProduct(ProductEntity oProduct)
+        public static void CreateProduct(ProductEntity oProduct)
         {
             using InventoryContext db = new InventoryContext();
             db.Products.Add(oProduct);
             db.SaveChanges();
         }
 
-        public void UpdateProduct(ProductEntity oProduct)
+        public static void UpdateProduct(ProductEntity oProduct)
         {
             using InventoryContext db = new InventoryContext();
             db.Products.Update(oProduct);

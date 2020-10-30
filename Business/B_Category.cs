@@ -9,7 +9,7 @@ namespace Business
 {
     public class B_Category
     {
-        public CategoryEntity GetCategory(string id)
+        public static CategoryEntity GetCategory(string id)
         {
             using InventoryContext db = new InventoryContext();
             return db.Categories
@@ -17,20 +17,20 @@ namespace Business
                 .FirstOrDefault();
         }
 
-        public List<CategoryEntity> CategoryList()
+        public static List<CategoryEntity> CategoryList()
         {
             using InventoryContext db = new InventoryContext();
             return db.Categories.ToList();
         }
 
-        public void CreateCategory(CategoryEntity oCategory)
+        public static void CreateCategory(CategoryEntity oCategory)
         {
             using InventoryContext db = new InventoryContext();
             db.Categories.Add(oCategory);
             db.SaveChanges();
         }
 
-        public void UpdateCategory(CategoryEntity oCategory)
+        public static void UpdateCategory(CategoryEntity oCategory)
         {
             using InventoryContext db = new InventoryContext();
             db.Categories.Update(oCategory);
