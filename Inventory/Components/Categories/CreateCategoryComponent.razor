@@ -1,0 +1,31 @@
+﻿@using Entities
+@using Business
+
+@inject NavigationManager navigator
+
+<div>
+    <EditForm Model="oCategory">
+        <div class="form-group">
+            <label>Referencia:</label>
+            <InputText @bind-Value="oCategory.CategoryID" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Nombre de categoría:</label>
+            <InputText @bind-Value="oCategory.CategoryName" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <input type="button" value="Agregar categoría" @onclick="SaveCategory" class="btn btn-primary" />
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    CategoryEntity oCategory = new CategoryEntity();
+
+    private void SaveCategory()
+    {
+        B_Category.CreateCategory(oCategory);
+        navigator.NavigateTo("category/list");
+    }
+}
