@@ -5,16 +5,13 @@
 
 <div>
     <EditForm Model="oProduct">
+        <input type="hidden" value="@oProduct.ProductID" />
         <div class="form-group">
-            <label>Referencia:</label>
-            <InputText @bind-Value="oProduct.ProductID" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label>Nombre del producto:</label>
+            <label>Nombre:</label>
             <InputText @bind-Value="oProduct.ProductName" class="form-control" />
         </div>
         <div class="form-group">
-            <label>Descripción del producto:</label>
+            <label>Descripción:</label>
             <InputTextArea @bind-Value="oProduct.ProductDescription" class="form-control" />
         </div>
 
@@ -29,24 +26,28 @@
         </div>
 
         <div class="form-group">
-            <input type="button" value="Agregar producto" @onclick="SaveProduct" />
+            <input type="button" value="Actualizar producto" @onclick="SaveProduct" />
         </div>
     </EditForm>
 </div>
 
 @code {
+    [Parameter]
+    public string ProductId { get; set; }
+
     ProductEntity oProduct = new ProductEntity();
     List<CategoryEntity> categories = new List<CategoryEntity>();
 
     protected override async Task OnInitializedAsync()
     {
+        oProduct = B_Product.GetProduct(ProductId);
         categories = B_Category.CategoryList();
     }
 
 
     private void SaveProduct()
     {
-        B_Product.CreateProduct(oProduct);
+        B_Product.UpdateProduct(oProduct);
         navigator.NavigateTo("product/list");
     }
 }
