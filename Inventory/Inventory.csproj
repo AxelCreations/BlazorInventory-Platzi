@@ -8,8 +8,4 @@
     <ProjectReference Include="..\Business\Business.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\Storage\" />
-  </ItemGroup>
-
 </Project>

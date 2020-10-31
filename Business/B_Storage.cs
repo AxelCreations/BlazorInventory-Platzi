@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using DataAccess;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business
 {
@@ -23,6 +24,16 @@ namespace Business
             return db.Storages.ToList();
         }
 
+        public static List<StorageEntity> StorageProductsByWarehouse(string warehouseId)
+        {
+            using InventoryContext db = new InventoryContext();
+            return db.Storages
+                .Include(s => s.Product)
+                .Include(s => s.Warehouse)
+                .Where(s => s.WarehouseID == warehouseId)
+                .ToList();
+        }
+
         public static void CreateStorage(StorageEntity oStorage)
         {
             using InventoryContext db = new InventoryContext();
@@ -35,6 +46,14 @@ namespace Business
             using InventoryContext db = new InventoryContext();
             db.Storages.Update(oStorage);
             db.SaveChanges();
+        }
+
+        public static bool IsProductInWarehouse(string id)
+        {
+            using InventoryContext db = new InventoryContext();
+            return db.Storages
+                .Where(s => s.StorageID == id)
+                .Any();
         }
     }
 }
